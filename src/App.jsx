@@ -121,8 +121,8 @@ function LayoutFlow() {
               gap: "10px",
               backgroundColor: "white",
               padding: "10px",
-              border: '2px solid gray',
-              borderRadius: '10px'
+              border: "2px solid gray",
+              borderRadius: "10px",
             }}
           >
             <button
@@ -138,14 +138,14 @@ function LayoutFlow() {
               {isDrawerOpen ? (
                 <Icon
                   icon="solar:alt-arrow-up-line-duotone"
-                  width="24px"
-                  height="24px"
+                  width="40px"
+                  height="40px"
                 />
               ) : (
                 <Icon
                   icon="ic:round-control-camera"
-                  width="24px"
-                  height="24px"
+                  width="40px"
+                  height="40px"
                 />
               )}
             </button>

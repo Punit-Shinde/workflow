@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import {
-  Panel,
   useReactFlow,
   getNodesBounds,
   getViewportForBounds,
@@ -71,7 +70,7 @@ function DownloadButton() {
       <img
         src="/assets/images/reactflow/icons/image-download.svg"
         style={{ width: "30px" }}
-      />{" "}
+      />
     </button>
   );
 }
