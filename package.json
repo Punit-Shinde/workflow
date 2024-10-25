@@ -15,6 +15,7 @@
     "@mui/styled-engine": "^6.1.5",
     "@xyflow/react": "^12.3.2",
     "elkjs": "^0.9.3",
+    "html-to-image": "^1.11.11",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
