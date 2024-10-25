@@ -1,20 +1,19 @@
 import React, { useCallback, useLayoutEffect, useState } from "react";
-import { Icon } from "@iconify-icon/react";
-import {
-  ReactFlow,
-  ReactFlowProvider,
-  addEdge,
-  Panel,
-  useNodesState,
-  useEdgesState,
-  useReactFlow,
-  Controls,
-  MiniMap,
-  Background,
+import { 
+  ReactFlow, 
+  ReactFlowProvider, 
+  addEdge, 
+  Panel, 
+  useNodesState, 
+  useEdgesState, 
+  useReactFlow, 
+  Controls, 
+  MiniMap, 
+  Background 
 } from "@xyflow/react";
 import ELK from "elkjs/lib/elk.bundled.js";
-import DownloadButton from "./DownloadButton"; // Import the DownloadButton
 import CustomNode from "./CustomNodes.jsx"; // Import the custom node component
+import Drawer from "./Drawer"; // Import the Drawer component
 import "@xyflow/react/dist/style.css";
 import { initialNodes, initialEdges } from "./nodes-edges.js";
 
@@ -58,7 +57,7 @@ function LayoutFlow() {
   const { fitView } = useReactFlow();
   const [isHorizontal, setIsHorizontal] = useState(false); // Track layout direction
   const [edgeType, setEdgeType] = useState("smoothstep"); // Track current edge type
-  const [isDrawerOpen, setIsDrawerOpen] = useState(true); // State to control drawer visibility
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false); // State to control drawer visibility
 
   const onConnect = useCallback(
     (params) => {
@@ -101,6 +100,8 @@ function LayoutFlow() {
     custom: (props) => <CustomNode {...props} isHorizontal={isHorizontal} />, // Pass the layout direction to the custom node
   };
 
+  
+
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
       <ReactFlow
@@ -110,165 +111,20 @@ function LayoutFlow() {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         fitView
-        nodeTypes={nodeTypes}
+        nodeTypes={nodeTypes} // Pass custom node types here
         draggable={true}
       >
-        <Panel position="top-right" style={{}}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "10px",
-              backgroundColor: "white",
-              padding: "10px",
-              border: "2px solid gray",
-              borderRadius: "10px",
-            }}
-          >
-            <button
-              onClick={() => setIsDrawerOpen(!isDrawerOpen)}
-              style={{
-                width: "50px",
-                height: "50px",
-                backgroundColor: "transparent",
-                border: "none",
-                cursor: "pointer",
-              }}
-            >
-              {isDrawerOpen ? (
-                <Icon
-                  icon="solar:alt-arrow-up-line-duotone"
-                  width="40px"
-                  height="40px"
-                />
-              ) : (
-                <Icon
-                  icon="ic:round-control-camera"
-                  width="40px"
-                  height="40px"
-                />
-              )}
-            </button>
-            {isDrawerOpen && (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 5,
-                }}
-              >
-                <button
-                  style={{
-                    width: "50px",
-                    height: "50px",
-                    backgroundColor: "transparent",
-                    border: "none",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => onLayout({ direction: "DOWN" })}
-                >
-                  <img
-                    src="/assets/images/reactflow/icons/vertical.svg"
-                    style={{ width: "100%", height: "100%" }}
-                  />
-                </button>
-                <button
-                  style={{
-                    width: "50px",
-                    height: "50px",
-                    backgroundColor: "transparent",
-                    border: "none",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => onLayout({ direction: "RIGHT" })}
-                >
-                  <img
-                    src="/assets/images/reactflow/icons/horizontal.svg"
-                    style={{ width: "100%", height: "100%" }}
-                  />
-                </button>
-                <div
-                  style={{
-                    height: "1px",
-                    backgroundColor: "#D3D3D3", // Light gray color
-                    margin: "5px 0",
-                  }}
-                />
-                <button
-                  style={{
-                    width: "50px",
-                    height: "50px",
-                    backgroundColor: "transparent",
-                    border: "none",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => setEdgeType("straight")}
-                >
-                  <img
-                    src="/assets/images/reactflow/icons/straight.svg"
-                    style={{ width: "100%", height: "100%" }}
-                  />
-                </button>
-                <button
-                  style={{
-                    width: "50px",
-                    height: "50px",
-                    backgroundColor: "transparent",
-                    border: "none",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => setEdgeType("step")}
-                >
-                  <img
-                    src="/assets/images/reactflow/icons/steps.svg"
-                    style={{ width: "100%", height: "100%" }}
-                  />
-                </button>
-                <button
-                  style={{
-                    width: "50px",
-                    height: "50px",
-                    backgroundColor: "transparent",
-                    border: "none",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => setEdgeType("smoothstep")}
-                >
-                  <img
-                    src="/assets/images/reactflow/icons/smoothsteps.svg"
-                    style={{ width: "100%", height: "100%" }}
-                  />
-                </button>
-                <button
-                  style={{
-                    width: "50px",
-                    height: "50px",
-                    backgroundColor: "transparent",
-                    border: "none",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => setEdgeType("bezier")}
-                >
-                  <img
-                    src="/assets/images/reactflow/icons/bezier.svg"
-                    style={{ width: "100%", height: "100%" }}
-                  />
-                </button>
-                <div
-                  style={{
-                    height: "1px",
-                    backgroundColor: "#D3D3D3", // Light gray color
-                    margin: "5px 0",
-                  }}
-                />
-                <DownloadButton />
-              </div>
-            )}
-          </div>
+        <Panel position="top-right">
+          <Drawer 
+            isDrawerOpen={isDrawerOpen}
+            setIsDrawerOpen={setIsDrawerOpen}
+            onLayout={onLayout}
+            setEdgeType={setEdgeType}
+          />
         </Panel>
-        <Background bgColor="#F3F7FA" />
+        {/* <Background bgColor="#F3F7FA" /> */}
         <Controls />
-        <MiniMap />
+        <MiniMap style={{ boxShadow: "0px 5px 6px rgb(0 0 0 / 0.25)" }} />
       </ReactFlow>
     </div>
   );

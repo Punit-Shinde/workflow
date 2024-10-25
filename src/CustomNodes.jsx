@@ -12,7 +12,6 @@ const CustomNode = ({ data, isHorizontal }) => {
         alignItems: "center",
       }}
     >
-      {/* Image node with source and target handles */}
       <div style={{ display: "flex", justifyContent: "center", position: "relative" }}>
         <img
           src={data.icon}
@@ -20,43 +19,45 @@ const CustomNode = ({ data, isHorizontal }) => {
           style={{
             width: 60,
             height: 60,
-            filter: "drop-shadow(0px 5px 6px rgb(0 0 0 / 0.25))",
+            filter: "drop-shadow(0px 5px 6px rgba(0, 0, 0, 0.25))",
           }}
         />
         
-        {/* Add source and target handles, position dynamically */}
+        {/* Source Handle */}
         <Handle
           type="source"
-          position={isHorizontal ? "right" : "bottom"} // Dynamically position based on layout direction
+          position={isHorizontal ? "right" : "bottom"}
           style={{
             background: "transparent",
-            top: isHorizontal ? "50%" : "90%", // Position the source handle at the bottom or center based on layout
-            left: isHorizontal ? "90%" : "50%", // Move to the right or center based on layout
-            transform: isHorizontal ? "translateY(-50%)" : "translateX(-50%)", // Adjust transform for vertical
+            top: isHorizontal ? "50%" : "90%",
+            left: isHorizontal ? "90%" : "50%",
+            transform: isHorizontal ? "translateY(-50%)" : "translateX(-50%)",
             border: "none",
           }}
         />
+        
+        {/* Target Handle */}
         <Handle
           type="target"
-          position={isHorizontal ? "left" : "top"} // Dynamically position based on layout direction
+          position={isHorizontal ? "left" : "top"}
           style={{
             background: "transparent",
-            top: isHorizontal ? "50%" : 0, // Position the target handle at the top or center based on layout
-            left: isHorizontal ? "0" : "50%", // Move to the left or center based on layout
-            transform: isHorizontal ? "translateY(-50%)" : "translateX(-50%)", // Adjust transform for vertical
+            top: isHorizontal ? "50%" : 0,
+            left: isHorizontal ? 0 : "50%",
+            transform: isHorizontal ? "translateY(-50%)" : "translateX(-50%)",
             border: "none",
           }}
         />
       </div>
 
-      {/* Label and subtext position dynamically based on layout */}
+      {/* Label and Subtext */}
       <div
         style={{
           position: "relative",
-          textWrap:"nowrap",
-          marginTop: isHorizontal ? 10 : 0, // Add margin on top for horizontal layout
-          textAlign: isHorizontal ? "center" : "left", // Center text in horizontal layout
-          marginLeft: isHorizontal ? 0 : "10px", // For vertical layout, move to the right of the image
+          textWrap: "nowrap",
+          marginTop: isHorizontal ? 10 : 0,
+          textAlign: isHorizontal ? "center" : "left",
+          marginLeft: isHorizontal ? 0 : "10px",
         }}
       >
         <div
